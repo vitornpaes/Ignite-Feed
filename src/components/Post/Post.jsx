@@ -1,4 +1,5 @@
 import styles from "./Post.module.css";
+import { Comment } from "./Comment";
 
 export function Post() {
   return (
@@ -10,8 +11,8 @@ export function Post() {
             src="https://avatars.githubusercontent.com/u/90912841?v=4"
           />
           <div className={styles.authorInfo}>
-            <strong></strong>
-            <span></span>
+            <strong>Vitor Paes</strong>
+            <span>Web Developer</span>
           </div>
         </div>
         <time title="11 de maio às 08:00" dateTime="2023-05-11 08:00:00">
@@ -26,7 +27,24 @@ export function Post() {
         <p>
           <a href="#">👉 jane.design/doctorcare</a>
         </p>
-        <p>#novoprojeto #nlw #rocketseat</p>
+        <p>
+          <a href="">#novoprojeto</a> <a href="">#nlw</a>{" "}
+          <a href="">#rocketseat</a>
+        </p>
+      </div>
+
+      <form className={styles.commentForm}>
+        <strong>Deixe seu feedback</strong>
+        <textarea placeholder="Deixe um comentário" />
+        <footer>
+          <button type="submit">Comentar</button>
+        </footer>
+      </form>
+
+      <div className={styles.commentList}>
+        <Comment/>
+        <Comment/>
+        <Comment/>
       </div>
     </div>
   );
