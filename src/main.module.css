@@ -1,0 +1,10 @@
+.wrapper {
+  max-width: 70rem; /*- Largura total do conteudo do site -*/
+  margin: 2rem auto; /*- 32px de distancia do header, larguras auto(responsivo) -*/
+  padding: 0 1rem; /*- caso diminui a tela para um tamanho menor que 70rem, da um padding nas lateral de 16px, para nao ficar colada. -*/
+  display: grid;
+  grid-template-columns: 16rem 1fr;
+  gap: 2rem;
+  align-items: flex-start; /*- Alinhamento ao topo, para nao esticar o aside, pro tamanho da main -*/
+
+}
