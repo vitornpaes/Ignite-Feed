@@ -1,7 +1,9 @@
 import { Avatar } from "../Avatar";
 import styles from "./Comment.module.css";
 import { ThumbsUp, Trash } from "phosphor-react";
-export function Comment() {
+import PropTypes from "prop-types";
+
+export function Comment({ content }) {
   return (
     <div className={styles.comment}>
       <Avatar src="https://avatars.githubusercontent.com/u/90912841?v=4" />
@@ -20,7 +22,7 @@ export function Comment() {
             </button>
           </div>
 
-          <p>Muito bom Devon, parabéns!! 👏👏</p>
+          <p>{content}</p>
         </div>
         <footer>
           <button>
@@ -32,3 +34,7 @@ export function Comment() {
     </div>
   );
 }
+
+Comment.propTypes = {
+  content: PropTypes.string.isRequired,
+};
