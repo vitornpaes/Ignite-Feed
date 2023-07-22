@@ -6,9 +6,10 @@ import { Comment } from "./Comment";
 import { Avatar } from "../Avatar";
 import { useState } from "react";
 
+
 export function Post({ author, publishedAt, content }) {
   const [comments, setComments] = useState([]);
-  const [newCommentText, setNewCommentText] = useState([""]);
+  const [newCommentText, setNewCommentText] = useState("");
   const publishedDateFormatted = format(
     publishedAt,
     "d 'de' LLLL 'às 'HH:mm'h'",
@@ -29,16 +30,20 @@ export function Post({ author, publishedAt, content }) {
   }
 
   function handleNewCommentChange() {
+
+    event.target.setCustomValidity("");
     setNewCommentText(event.target.value);
   }
-
-  function deleteComment(commentToDelete) {
-    const commentsWithoutDelete = comments.filter(comment =>{
-      return comment !== commentToDelete
-    })
-    setComments(commentsWithoutDelete)
+  function handleNewCommentInvalid() {
+    event.target.setCustomValidity("Esse campo é obrigatório!");
   }
-
+  function deleteComment(commentToDelete) {
+    const commentsWithoutDelete = comments.filter((comment) => {
+      return comment !== commentToDelete;
+    });
+    setComments(commentsWithoutDelete);
+  }
+  const isNewCommentEmpty = newCommentText.length === 0;
   return (
     <div className={styles.post}>
       <div className={styles.header}>
@@ -72,14 +77,19 @@ export function Post({ author, publishedAt, content }) {
 
       <form onSubmit={handleCreateNewComment} className={styles.commentForm}>
         <strong>Deixe seu feedback</strong>
+
         <textarea
           name="comment"
           placeholder="Deixe um comentário"
           value={newCommentText}
           onChange={handleNewCommentChange}
+          onInvalid={handleNewCommentInvalid}
+          required
         />
         <footer>
-          <button type="submit">Comentar</button>
+          <button type="submit" disabled={isNewCommentEmpty}>
+            Comentar
+          </button>
         </footer>
       </form>
 
@@ -90,6 +100,7 @@ export function Post({ author, publishedAt, content }) {
               key={comment}
               content={comment}
               onDeleteComment={deleteComment}
+
             />
           );
         })}
@@ -107,7 +118,7 @@ Post.propTypes = {
   publishedAt: PropTypes.instanceOf(Date).isRequired,
   content: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
       type: PropTypes.string.isRequired,
       content: PropTypes.string.isRequired,
     })

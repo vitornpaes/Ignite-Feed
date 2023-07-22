@@ -1,14 +1,21 @@
 import { Avatar } from "../Avatar";
 import styles from "./Comment.module.css";
 import { ThumbsUp, Trash } from "phosphor-react";
+import { v4 as uuidv4 } from "uuid";
 import PropTypes from "prop-types";
 
+function generateRandomId() {
+  return uuidv4();
+}
+
 export function Comment({ content, onDeleteComment }) {
+  const commentId = generateRandomId();
+
   function handleDeleteComment() {
     onDeleteComment(content);
   }
   return (
-    <div className={styles.comment}>
+    <div className={styles.comment} key={commentId}>
       <Avatar src="https://avatars.githubusercontent.com/u/90912841?v=4" />
       <div className={styles.commentBox}>
         <div className={styles.commentContent}>

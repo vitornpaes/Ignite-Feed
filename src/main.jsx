@@ -5,43 +5,48 @@ import styles from "./main.module.css";
 import { Header } from "./components/Header/Header";
 import { Sidebar } from "./components/Siderbar/Sidebar";
 import { Post } from "./components/Post/Post";
+import { v4 as uuidv4 } from "uuid"
+
+function generateRandomId() {
+  return uuidv4();
+}
 
 const posts = [
   {
-    id: 1,
+    id: generateRandomId(),
     author: {
       avatarUrl: "http://github.com/vitornpaes.png",
       name: "Vitor Paes",
       role: "Web Developer",
     },
     content: [
-      { id: 2, type: "paragraph", content: "Fala galeraa 👋" },
+      { id: generateRandomId(), type: "paragraph", content: "Fala galeraa 👋" },
       {
-        id: 3,
+        id: generateRandomId(),
         type: "paragraph",
         content:
           "Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀",
       },
-      { id: 4, type: "link", content: "👉 jane.design/doctorcar" },
+      { id: generateRandomId(), type: "link", content: "👉 jane.design/doctorcar" },
     ],
     publishedAt: new Date("2023-07-18 20:00:00"),
   },
   {
-    id: 2,
+    id: generateRandomId(),
     author: {
       avatarUrl: "http://github.com/vitornpaes.png",
       name: "Vitor Paes",
       role: "Web Developer",
     },
     content: [
-      { id: 5, type: "paragraph", content: "Fala galeraa 👋" },
+      { id: generateRandomId(), type: "paragraph", content: "Fala galeraa 👋" },
       {
-        id: 6,
+        id: generateRandomId(),
         type: "paragraph",
         content:
           "Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀",
       },
-      { id: 7, type: "link", content: "👉 jane.design/doctorcar" },
+      { id: generateRandomId(), type: "link", content: "👉 jane.design/doctorcar" },
     ],
     publishedAt: new Date("2023-07-18 20:00:00"),
   },
@@ -56,6 +61,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         {posts.map((post) => (
           <Post
             key={post.id}
+            id={post.id}
             author={post.author}
             content={post.content}
             publishedAt={post.publishedAt}
