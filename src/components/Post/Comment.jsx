@@ -3,16 +3,24 @@ import styles from "./Comment.module.css";
 import { ThumbsUp, Trash } from "phosphor-react";
 import { v4 as uuidv4 } from "uuid";
 import PropTypes from "prop-types";
+import { useState } from "react";
 
 function generateRandomId() {
   return uuidv4();
 }
-
 export function Comment({ content, onDeleteComment }) {
-  const commentId = generateRandomId();
+  const [likeCount, setLikeCount] = useState(0);
 
+  const commentId = generateRandomId();
+  
   function handleDeleteComment() {
     onDeleteComment();
+  }
+
+  function handleLikeComment(){
+    setLikeCount((state)=>{
+      return state + 1
+    })
   }
   return (
     <div className={styles.comment} key={commentId}>
@@ -35,9 +43,8 @@ export function Comment({ content, onDeleteComment }) {
           <p>{content}</p>
         </div>
         <footer>
-          <button>
-            <ThumbsUp />
-            Aplaudir <span>20</span>
+          <button onClick={handleLikeComment}>
+            <ThumbsUp /> Aplaudir<span> {likeCount}</span>
           </button>
         </footer>
       </div>
