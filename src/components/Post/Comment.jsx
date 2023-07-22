@@ -3,7 +3,10 @@ import styles from "./Comment.module.css";
 import { ThumbsUp, Trash } from "phosphor-react";
 import PropTypes from "prop-types";
 
-export function Comment({ content }) {
+export function Comment({ content, onDeleteComment }) {
+  function handleDeleteComment() {
+    onDeleteComment(content);
+  }
   return (
     <div className={styles.comment}>
       <Avatar src="https://avatars.githubusercontent.com/u/90912841?v=4" />
@@ -17,7 +20,7 @@ export function Comment({ content }) {
               </time>
             </div>
 
-            <button title="Deletar comentário">
+            <button onClick={handleDeleteComment} title="Deletar comentário">
               <Trash size={24} />
             </button>
           </div>
@@ -37,4 +40,5 @@ export function Comment({ content }) {
 
 Comment.propTypes = {
   content: PropTypes.string.isRequired,
+  onDeleteComment: PropTypes.func.isRequired,
 };

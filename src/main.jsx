@@ -34,14 +34,14 @@ const posts = [
       role: "Web Developer",
     },
     content: [
-      { id: 2, type: "paragraph", content: "Fala galeraa 👋" },
+      { id: 5, type: "paragraph", content: "Fala galeraa 👋" },
       {
-        id: 3,
+        id: 6,
         type: "paragraph",
         content:
           "Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀",
       },
-      { id: 4, type: "link", content: "👉 jane.design/doctorcar" },
+      { id: 7, type: "link", content: "👉 jane.design/doctorcar" },
     ],
     publishedAt: new Date("2023-07-18 20:00:00"),
   },
