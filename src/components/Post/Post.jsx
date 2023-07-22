@@ -6,6 +6,9 @@ import { Comment } from "./Comment";
 import { Avatar } from "../Avatar";
 import { useState } from "react";
 
+function generateRandomId() {
+  return Math.random().toString(36).substr(2, 9);
+}
 
 export function Post({ author, publishedAt, content }) {
   const [comments, setComments] = useState([]);
@@ -30,19 +33,25 @@ export function Post({ author, publishedAt, content }) {
   }
 
   function handleNewCommentChange() {
-
     event.target.setCustomValidity("");
     setNewCommentText(event.target.value);
   }
   function handleNewCommentInvalid() {
     event.target.setCustomValidity("Esse campo é obrigatório!");
   }
-  function deleteComment(commentToDelete) {
-    const commentsWithoutDelete = comments.filter((comment) => {
-      return comment !== commentToDelete;
+  function handleKeyPress(event) {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      handleCreateNewComment();
+    }
+  }
+  function deleteComment(commentIndex) {
+    const commentsWithoutDelete = comments.filter((index) => {
+      return index !== commentIndex;
     });
     setComments(commentsWithoutDelete);
   }
+
   const isNewCommentEmpty = newCommentText.length === 0;
   return (
     <div className={styles.post}>
@@ -84,6 +93,7 @@ export function Post({ author, publishedAt, content }) {
           value={newCommentText}
           onChange={handleNewCommentChange}
           onInvalid={handleNewCommentInvalid}
+          onKeyPress={handleKeyPress}
           required
         />
         <footer>
@@ -94,13 +104,12 @@ export function Post({ author, publishedAt, content }) {
       </form>
 
       <div className={styles.commentList}>
-        {comments.map((comment) => {
+        {comments.map((comment, index) => {
           return (
             <Comment
-              key={comment}
+              key={generateRandomId() + index}
               content={comment}
-              onDeleteComment={deleteComment}
-
+              onDeleteComment={() => deleteComment(index)}
             />
           );
         })}
