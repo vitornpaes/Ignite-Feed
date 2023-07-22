@@ -12,7 +12,7 @@ export function Comment({ content, onDeleteComment }) {
   const commentId = generateRandomId();
 
   function handleDeleteComment() {
-    onDeleteComment(content);
+    onDeleteComment();
   }
   return (
     <div className={styles.comment} key={commentId}>

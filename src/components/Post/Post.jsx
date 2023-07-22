@@ -46,7 +46,7 @@ export function Post({ author, publishedAt, content }) {
     }
   }
   function deleteComment(commentIndex) {
-    const commentsWithoutDelete = comments.filter((index) => {
+    const commentsWithoutDelete = comments.filter((content , index) => {
       return index !== commentIndex;
     });
     setComments(commentsWithoutDelete);
