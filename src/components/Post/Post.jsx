@@ -9,27 +9,17 @@ import { useState } from "react";
 export function Post({ author, publishedAt, content }) {
   const [comments, setComments] = useState([]);
   const [newCommentText, setNewCommentText] = useState([""]);
-
-  let publishedDateFormatted;
-  let publishedDateRelativeFormatted;
-
-   if (!(publishedAt instanceof Date && !isNaN(publishedAt))) {
-    // Se não for uma data válida, defina publishedDateFormatted como uma string vazia ou mensagem de erro
-    publishedDateFormatted = "Data inválida";
-    publishedDateRelativeFormatted = "Data inválida";
-  } else {
-    publishedDateFormatted = format(
-      publishedAt,
-      "d 'de' LLLL 'às 'HH:mm'h'",
-      {
-        locale: ptBR,
-      }
-    );
-    publishedDateRelativeFormatted = formatDistanceToNow(publishedAt, {
+  const publishedDateFormatted = format(
+    publishedAt,
+    "d 'de' LLLL 'às 'HH:mm'h'",
+    {
       locale: ptBR,
-      addSuffix: true,
-    });
-  }
+    }
+  );
+  const publishedDateRelativeFormatted = formatDistanceToNow(publishedAt, {
+    locale: ptBR,
+    addSuffix: true,
+  });
 
   function handleCreateNewComment() {
     event.preventDefault();
