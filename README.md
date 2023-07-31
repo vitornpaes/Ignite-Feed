@@ -1,6 +1,6 @@
 # Sobre
 
-Ignite é um projeto construído utilizando React vite.
+Ignite feed é um projeto construído utilizando React vite.
 
 O objetivo é criar uma aplicação que imita um feed, com postagens e comentarios(iteração e imutabilidade).
 
